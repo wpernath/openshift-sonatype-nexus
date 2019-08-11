@@ -154,14 +154,14 @@ parameters:
 - displayName: Sonatype Nexus version
   name: NEXUS_VERSION
   required: true
-  value: 3.15.0
+  value: 3.16.2
 - description: Volume space available for Sonatype Nexus e.g. 512Mi, 2Gi
   displayName: Volume Space for Nexus
   name: VOLUME_CAPACITY
   required: true
-  value: 2Gi
+  value: 5Gi
 - description: Max memory allocated to the Nexus pod
   displayName: Max Memory
   name: MAX_MEMORY
   required: true
-  value: 1Gi
+  value: 2Gi
