@@ -145,7 +145,8 @@ parameters:
 - displayName: Sonatype Nexus version
   name: NEXUS_VERSION
   required: true
-  value: 3.6.0
+  #value: 3.6.0
+  value: 3.18.1
 - description: Max memory allocated to the Nexus pod
   displayName: Max Memory
   name: MAX_MEMORY
