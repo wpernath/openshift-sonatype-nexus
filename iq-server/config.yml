@@ -6,10 +6,10 @@
 sonatypeWork: /sonatype-work
 
 # Path to a license file to automatically install if unlicensed.
-#licenseFile: ./license.lic
+licenseFile: /sonatype-work/iq-license/license.lic
 
 # Base URL of the Sonatype CLM server for user facing links back to the server.
-baseUrl: https://iq-server.mycompany.com
+baseUrl: https://iq-server.notmycompany.com
 
 # Hour of the day(0-23) to schedule Policy Monitoring execution. The default is midnight.
 #policyMonitoringHour: 0

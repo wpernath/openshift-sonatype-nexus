@@ -1,6 +1,6 @@
 # Sonatype Nexus on OpenShift
 
-This repo contains OpenShift templates and scripts for deploying Sonatype Nexus 2 an 3
+This repo contains OpenShift templates and scripts for deploying Sonatype Nexus 2 and 3, 
 and pre-configuring Red Hat and JBoss maven repositories on Nexus via post deploy hooks.
 You can modify the post hook in the templates and add other Nexus repositories by using these [helper
 functions](scripts/nexus-functions).
@@ -58,3 +58,7 @@ In order to specify the Nexus version to be deployed use ```NEXUS_VERSION``` par
 oc new-app nexus2 -p NEXUS_VERSION=2.14.3
 oc new-app nexus3 -p NEXUS_VERSION=3.5.2
 ```
+
+# Deploy Sonatype Nexus IQ Server
+
+If you'd like to also deploy Sonatype Nexus IQ Server to handle policies/firewalling/etc then jump into the ***iq-server*** directory and check out the instructions and objects there.

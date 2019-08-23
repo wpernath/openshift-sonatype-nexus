@@ -94,6 +94,8 @@ objects:
             name: ${SERVICE_NAME}-work
           - mountPath: /etc/nexus-iq-server
             name: ${SERVICE_NAME}-config-volume
+          - mountPath: /sonatype-work/iq-license
+            name: ${SERVICE_NAME}-license-volume
         dnsPolicy: ClusterFirst
         restartPolicy: Always
         securityContext: {}
@@ -107,6 +109,12 @@ objects:
             items:
             - key: config.yml
               path: config.yml
+        - name: ${SERVICE_NAME}-license-volume
+          secret:
+            secretName: iq-server-license
+            items:
+            - key: iq-server-license.lic
+              path: license.lic
     test: false
     triggers:
     - type: ConfigChange
