@@ -88,6 +88,8 @@ objects:
           volumeMounts:
           - mountPath: /sonatype-work
             name: ${SERVICE_NAME}-work
+          - mountPath: /etc/nexus-iq-server
+            name: ${SERVICE_NAME}-config-volume
         dnsPolicy: ClusterFirst
         restartPolicy: Always
         securityContext: {}
@@ -96,6 +98,12 @@ objects:
         - name: ${SERVICE_NAME}-work
           persistentVolumeClaim:
             claimName: ${SERVICE_NAME}-pv
+        - name: ${SERVICE_NAME}-config-volume
+          configMap:
+            name: iq-server-config
+            items:
+            - key: config.yml
+              path: config.yml
     test: false
     triggers:
     - type: ConfigChange
