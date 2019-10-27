@@ -50,6 +50,12 @@ If you'd like to also deploy Sonatype Nexus IQ Server to handle policies/firewal
 
 # Nexus Repository Configuration
 
+## Installing a License
+
+In order to install a Sonatype Nexus license you can upload it via the Administration > System > Licensing portion of the Settings panel.
+
+***NOTE***: You will need to have launched Nexus via the Persistent template as the container needs to restart to load the license.  An ephemeral container is not able to have a license (at this time, ConfigMaps are being explored).
+
 ## LDAP
 
 The whole point of Nexus Repo Manager is to centrally manage components and repositories across your organization so every developer shouldn't have their own Nexus.  The easiest way to deploy Nexus centrally is via LDAP.
@@ -69,7 +75,7 @@ The whole point of Nexus Repo Manager is to centrally manage components and repo
   - **Username or DN**: CN=Directory Manager
   - **Password**: duh
   - **Connection Rules**: Default is fine
-5. Click ***Verify Connection** and if successful, click **Next**
+5. Click ***Verify Connection*** and if successful, click **Next**
 6. Now set the User and Group configuration as such:
   - **Configuration template**: Generic LDAP Server
   - **Base DN**: CN=accounts
@@ -96,11 +102,11 @@ Once LDAP is configured and tested to work, we need to set the Group from LDAP t
 2. Use the pane to the left to navigate to ```Administration > Security > Roles```
 3. Click ***Create Role > External Role Mapping > LDAP***
 4. Configure the Role as follows:
-  - Mapped Role: ipausers
-  - Role Name: LDAPUsers
-  - Role Description: Whatever your heart desires
-  - Privileges, Available: Click on one, then press ***Ctrl+A*** on your keyboard to select them all, and click add.
-  - Privileges, Given: Remove the following:
+  - **Mapped Role**: ipausers
+  - **Role Name**: LDAPUsers
+  - **Role Description**: Whatever your heart desires
+  - **Privileges, Available**: Click on one, then press ***Ctrl+A*** on your keyboard to select them all, and click add.
+  - **Privileges, Given**: Remove the following:
     - nx-all
     - nx-capabilities-all
     - nx-capabilities-create
@@ -132,9 +138,3 @@ Once LDAP is configured and tested to work, we need to set the Group from LDAP t
 5. Click ***Create role***
 
 Now once users login from LDAP they can do almost everything outside of administrative tasks that could affect others in the environment.
-
-## Installing a License
-
-In order to install a Sonatype Nexus license you can upload it via the Administration > System > Licensing portion of the Settings panel.
-
-***NOTE***: You will need to have launched Nexus via the Persistent template as the container needs to restart to load the license.  An ephemeral container is not able to have a license (at this time, ConfigMaps are being explored).
