@@ -39,14 +39,14 @@ oc new-app nexus3
 ### Deploy Specific Version
 In order to specify the Nexus version to be deployed use ```NEXUS_VERSION``` parameter:
 ```
-oc new-app nexus3 -p NEXUS_VERSION=3.5.2
+oc new-app nexus3 -p NEXUS_VERSION=3.16.2
 ```
 
 The last version tested that has worked with the post-deployment configuration script is ***3.16.2***.
 
 ## Deploy Sonatype Nexus IQ Server
 
-If you'd like to also deploy Sonatype Nexus IQ Server to handle policies/firewalling/etc then jump into the ***iq-server*** directory and check out the instructions and objects there.
+If you'd like to also deploy Sonatype Nexus IQ Server to handle policies/firewalling/etc then jump into the ***openshift-sonatype-nexus-iq*** repo and check out the instructions and objects there.
 
 # Nexus Repository Configuration
 
@@ -55,6 +55,17 @@ If you'd like to also deploy Sonatype Nexus IQ Server to handle policies/firewal
 In order to install a Sonatype Nexus license you can upload it via the Administration > System > Licensing portion of the Settings panel.
 
 ***NOTE***: You will need to have launched Nexus via the Persistent template as the container needs to restart to load the license.  An ephemeral container is not able to have a license (at this time, ConfigMaps are being explored).
+
+## Container Image Additions
+
+The container, found at [https://hub.docker.com/r/kenmoini/openshift-sonatype-nexus](https://hub.docker.com/r/kenmoini/openshift-sonatype-nexus) has some additional bits stuffed into the image.
+
+### LDAP and Self-Signed Certificates
+JavaX doesn't accept self-signed certificates when using LDAPS connectivity.  In order to get past this for normal LDAP deployments, you must import the certificates into the JRE keystore.
+
+To do this, there is a script, ```ss-ca-puller.sh```, that will loop through a list of hosts, connect and retrieve their SSL certificate, then add it to the JRE keystore.
+
+To add your own self-signed SSL certificates to the keystore you will need to modify the domain list in this Dockerfile and build the Docker image yourself - I do so everytime I use this for a workshop because the LDAP/RH IDM server is ephemeral and certificates change from workshop to workshop.
 
 ## LDAP
 
