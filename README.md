@@ -56,17 +56,6 @@ In order to install a Sonatype Nexus license you can upload it via the Administr
 
 ***NOTE***: You will need to have launched Nexus via the Persistent template as the container needs to restart to load the license.  An ephemeral container is not able to have a license (at this time, ConfigMaps are being explored).
 
-## Container Image Additions
-
-The container, found at [https://hub.docker.com/r/kenmoini/openshift-sonatype-nexus](https://hub.docker.com/r/kenmoini/openshift-sonatype-nexus) has some additional bits stuffed into the image.
-
-### LDAP and Self-Signed Certificates
-JavaX doesn't accept self-signed certificates when using LDAPS connectivity.  In order to get past this for normal LDAP deployments, you must import the certificates into the JRE keystore.
-
-To do this, there is a script, ```ss-ca-puller.sh```, that will loop through a list of hosts, connect and retrieve their SSL certificate, then add it to the JRE keystore.
-
-To add your own self-signed SSL certificates to the keystore you will need to modify the domain list in this Dockerfile and build the Docker image yourself - I do so everytime I use this for a workshop because the LDAP/RH IDM server is ephemeral and certificates change from workshop to workshop.
-
 ## LDAP
 
 The whole point of Nexus Repo Manager is to centrally manage components and repositories across your organization so every developer shouldn't have their own Nexus.  The easiest way to deploy Nexus centrally is via LDAP.
@@ -81,6 +70,7 @@ The whole point of Nexus Repo Manager is to centrally manage components and repo
   - **Protocol**: LDAPS
   - **Hostname**: idm.example.com
   - **Port**: 636
+  - **Use the Nexus truststore:** Check the box, click ***View Certificate***, and then click ***Add certificate to truststore***
   - **Search Base**: dc=example,dc=com
   - **Authentication Method**: Simple Authentication
   - **Username or DN**: CN=Directory Manager

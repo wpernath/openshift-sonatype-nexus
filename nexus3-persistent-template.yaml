@@ -18,7 +18,7 @@ objects:
     tags:
     - from:
         kind: DockerImage
-        name: docker.io/kenmoini/openshift-sonatype-nexus:${NEXUS_VERSION}
+        name: docker.io/sonatype/nexus3:${NEXUS_VERSION}
       name: ${NEXUS_VERSION}
 - apiVersion: v1
   kind: DeploymentConfig

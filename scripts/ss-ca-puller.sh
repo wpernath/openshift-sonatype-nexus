@@ -16,7 +16,7 @@ do
   echo "Q" | openssl s_client -connect ${CERT} 2>/dev/null | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > /tmp/$FILENAME.pem
   
   echo "Importing certificate to keystore..."
-  keytool -list -storepass changeit -keystore $JAVA_HOME/jre/lib/security/cacerts -alias $CERTNAME
+  keytool -list -storepass "" -keystore $JAVA_HOME/jre/lib/security/cacerts -alias $CERTNAME
   if [ $? -eq 0 ]; then
     echo "Certificate already exists, skipping..."
   else
