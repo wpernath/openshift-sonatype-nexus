@@ -5,7 +5,7 @@ and pre-configuring Red Hat and JBoss maven repositories on Nexus via post deplo
 You can modify the post hook in the templates and add other Nexus repositories by using these [helper
 functions](scripts/nexus-functions).
 
-```
+```yaml
 post:
   execNewPod:
     containerName: ${SERVICE_NAME}
@@ -17,29 +17,34 @@ post:
 
 ## Import Templates
 
-In order to add Sonatype Nexus templates to OpenShift service catalog run the following commands:
+In order to add Sonatype Nexus 3 templates to OpenShift service catalog run the following commands:
 
-Sonatype Nexus 3:
-```
-oc create -f https://raw.githubusercontent.com/kenmoini/openshift-sonatype-nexus/master/nexus3-template.yaml
-oc create -f https://raw.githubusercontent.com/kenmoini/openshift-sonatype-nexus/master/nexus3-persistent-template.yaml
+```bash
+$ oc create -f https://raw.githubusercontent.com/kenmoini/openshift-sonatype-nexus/master/nexus3-template.yaml # Nexus 3, Ephemeral storage
+$ oc create -f https://raw.githubusercontent.com/kenmoini/openshift-sonatype-nexus/master/nexus3-persistent-template.yaml # Nexus 3, Persistent Storage
+$ oc create -f https://raw.githubusercontent.com/kenmoini/openshift-sonatype-nexus/master/nexus3-template-secure.yaml # Nexus 3, Ephemeral storage with Edge Terminated TLS
+$ oc create -f https://raw.githubusercontent.com/kenmoini/openshift-sonatype-nexus/master/nexus3-persistent-template-secure.yaml # Nexus 3, Persistent Storage with Edge Terminated TLS
 ```
 
 ## Deploy Nexus 3
 
 Deploy Sonatype Nexus 3 using one of the provided templates. If you have persistent volumes available in your cluster:
+
+```bash
+$ oc new-app nexus3-persistent
 ```
-oc new-app nexus3-persistent
-```
+
 Otherwise:
-```
-oc new-app nexus3
+
+```bash
+$ oc new-app nexus3
 ```
 
 ### Deploy Specific Version
 In order to specify the Nexus version to be deployed use ```NEXUS_VERSION``` parameter:
-```
-oc new-app nexus3 -p NEXUS_VERSION=3.16.2
+
+```bash
+$ oc new-app nexus3 -p NEXUS_VERSION=3.16.2
 ```
 
 The last version tested that has worked with the post-deployment configuration script is ***3.16.2***.
